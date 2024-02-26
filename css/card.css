@@ -1,0 +1,340 @@
+:root {
+    --default: 128, 128, 128;
+    --normal: 212, 214, 160;
+    --grass: 172, 226, 100;
+    --fire: 255, 139, 139;
+    --water: 140, 198, 206;
+    --electric: 247, 231, 82;
+    --ice: 102, 236, 255;
+    --ground: 219, 165, 103;
+    --flying: 142, 173, 228;
+    --poison: 206, 120, 230;
+    --fighting: 180, 108, 104;
+    --psychic: 223, 114, 147;
+    --dark: 166, 132, 175;
+    --rock: 146, 139, 113;
+    --bug: 166, 189, 137;
+    --ghost: 166, 132, 175;
+    --steel: 176, 175, 187;
+    --dragon: 158, 123, 248;
+    --fairy: 249, 174, 199;
+
+    --card-border-radius: 25px;
+    --card-saturate-color: 100%;
+
+    --card-color-filter: brightness(17%) hue-rotate(0deg) grayscale(0%) saturate(1000%) contrast(59%) opacity(47%);
+}
+
+@keyframes pokeImgTransition {
+    0% {
+        opacity: 0%;
+    }
+}
+
+@keyframes statusAnimation {
+    0% {
+        /* opacity: 0%; */
+        width: 0%;
+    }
+}
+
+@keyframes cardTransition {
+    0% {
+        transform: scale(0);
+    }
+}
+
+article.card {
+    position: relative;
+    min-width: 280px;
+    height: 353px;
+    filter: opacity(70%);
+    /* background-color: red; */
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: cardTransition 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+article.card:hover {
+    filter: opacity(130%);
+}
+
+article.card>div.face {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgb(var(--default));
+    filter: saturate(var(--card-saturate-color));
+    border-radius: var(--card-border-radius);
+    border-top-right-radius: 0;
+    transition: background-color 0.5s ease;
+}
+
+/* Card Header */
+
+article.card div.card-header {
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    width: 100%;
+    height: 45%;
+}
+
+div.card-header h1 {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+div.card-header figure {
+    position: absolute;
+    bottom: 15px;
+
+}
+
+div.card-header figure img {
+    user-select: none;
+
+    cursor: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'), auto;
+
+    max-height: 100px;
+    min-height: 70px;
+    animation: pokeImgTransition 1s ease-in-out;
+    transition: transform 0.5s ease;
+}
+
+div.card-header figure img:hover {
+    transform: scale(1.1);
+}
+
+div.card-header svg.up-part {
+    position: absolute;
+    bottom: 10px;
+    width: 75%;
+
+    fill: rgb(var(--default));
+    filter: var(--card-color-filter);
+    transition: fill 0.5s ease;
+}
+
+div.card-header div.flags {
+    position: absolute;
+    top: -13px;
+    right: -1px;
+
+    width: 12%;
+
+    list-style: none;
+    font-weight: bold;
+    color: #fff;
+
+    svg {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 81.81%, 50% 100%, 0% 81.81%);
+        width: 100%;
+        position: absolute;
+        fill: rgba(var(--default));
+        /* width: 100%; */
+        transition: transform 0.5s ease, fill 0.5s ease;
+    }
+
+    svg>path {
+        cursor: pointer;
+        transition: filter 0.5s ease;
+    }
+}
+
+div.card-header div.flags svg.flag1 {
+    z-index: 3;
+
+    path {
+        filter: brightness(72%);
+    }
+}
+
+div.card-header div.flags svg.flag1:hover {
+    transform: translateY(5px);
+
+    path {
+        filter: brightness(70%);
+    }
+}
+
+div.card-header div.flags svg.flag2 {
+    top: 19.5px;
+    z-index: 2;
+
+    path {
+        filter: brightness(82%);
+    }
+}
+
+div.card-header div.flags svg.flag2:hover {
+    transform: translateY(5px);
+
+    path {
+        filter: brightness(80%);
+    }
+}
+
+div.card-header div.flags svg.flag3 {
+    top: 38.5px;
+    z-index: 1;
+
+    path {
+        filter: brightness(90%);
+    }
+}
+
+div.card-header div.flags svg.flag3:hover {
+    transform: translateY(5px);
+
+    path {
+        filter: brightness(88%);
+    }
+}
+
+div.card-header div.flags svg.flag1:hover~svg.flag2,
+div.card-header div.flags svg.flag1:hover~svg.flag3 {
+    transform: translateY(5px);
+}
+
+div.card-header div.flags svg.flag2:hover~svg.flag3 {
+    transform: translateY(5px);
+}
+
+div.card-header div.flags svg>text {
+    user-select: none;
+    pointer-events: none;
+    fill: #fff;
+    font-size: 0.15;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Card Body */
+
+article.card div.card-body {
+    position: relative;
+
+    width: 100%;
+    height: calc(100% - 45%);
+
+    background-color: #ffffff94;
+    border-radius: var(--card-border-radius);
+}
+
+article.card div.card-body figure {
+    cursor: help;
+    position: absolute;
+    user-select: none;
+    top: 15px;
+    left: 15px;
+
+    width: 15px;
+}
+
+article.card div.card-body img.element {
+
+    opacity: 70%;
+
+    animation: pokeImgTransition 1s ease-in-out;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+article.card div.card-body img.element:hover {
+    opacity: 100%;
+    transform: scale(1.1);
+}
+
+article.card div.card-body h1 {
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+article.card div.card-body ul.pokemon-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    list-style: none;
+    /* background-color: red; */
+    height: 100%;
+}
+
+article.card div.card-body ul.pokemon-stats li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 21px;
+    width: 230px;
+
+    padding: 0 5px;
+
+    font-size: 12px;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    transition: transform 0.7s ease;
+}
+
+article.card div.card-body ul.pokemon-stats li:hover {
+    transform: scale(1.05);
+}
+
+article.card div.card-body ul.pokemon-stats li:hover>span.stats-number {
+    opacity: 100%;
+}
+
+article.card div.card-body ul.pokemon-stats li:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.541);
+}
+
+article.card div.card-body ul.pokemon-stats li>p {
+    font-weight: bold;
+    opacity: 80%;
+    margin-right: 5px;
+}
+
+article.card div.card-body ul.pokemon-stats li span.stats-number {
+    position: absolute;
+    right: 8px;
+    font-weight: bold;
+    font-size: 9px;
+    opacity: 0%;
+    cursor: default;
+    transition: opacity 0.5s ease;
+}
+
+article.card div.card-body ul.pokemon-stats li div.stats {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+}
+
+article.card div.card-body ul.pokemon-stats li div.stats span {
+    position: absolute;
+    height: 12px;
+
+    line-height: 15px;
+    font-size: 10px;
+    border-radius: 25px;
+    background-color: rgb(var(--default));
+    /* filter: brightness(70%); */
+    mix-blend-mode: multiply;
+
+
+    animation: statusAnimation 1s ease-in-out;
+}
