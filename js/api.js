@@ -4,6 +4,8 @@ const button = document.getElementById("add-pokemon");
 const reloadBtn = document.getElementById("reload");
 
 let ultimoValor = 0;
+let startTo = 0
+let resultado = 0
 
 // Funções
 
@@ -248,25 +250,19 @@ function loadCards() {
 // Eventos
 
 button.addEventListener("click", () => {
-
     let numero = parseFloat(document.getElementById('selectQTD').value);
 
-    let resultado = ultimoValor + numero;
-    let irAte = resultado - numero
+    resultado = ultimoValor + numero;
+    startTo = resultado - numero + 1
 
     ultimoValor = resultado;
 
-    if (irAte === 0) {
-        irAte = 1
-    }
-
-    for (let i = irAte; i < resultado; i++) {
+    for (let i = startTo; i <= resultado; i++) {
         console.log(i);
         obterDadosPokemon(i)
     }
 
     loadCards()
-
 });
 
 reloadBtn.addEventListener("click", () => {
