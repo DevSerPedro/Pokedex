@@ -44,6 +44,8 @@
     }
 }
 
+.animationSurge{}
+
 article.card {
     position: relative;
     min-width: 280px;
@@ -57,6 +59,10 @@ article.card {
 
 article.card:hover {
     filter: opacity(130%);
+    transform: scale(1.01);
+    -webkit-box-shadow: 0px 0px 36px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 36px -16px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 36px -16px rgba(0, 0, 0, 0.75);
 }
 
 article.card>div.face {
@@ -105,14 +111,14 @@ div.card-header figure img {
 
     cursor: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'), auto;
 
-    max-height: 100px;
-    min-height: 70px;
+    height: 100px;
+
     animation: pokeImgTransition 1s ease-in-out;
     transition: transform 0.5s ease;
 }
 
 div.card-header figure img:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 
 div.card-header svg.up-part {

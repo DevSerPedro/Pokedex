@@ -6,20 +6,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/api.js" defer></script>
     <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pokedex.css">
     <link rel="stylesheet" href="css/card.css">
     <title>Pokedex</title>
 </head>
 
 <body>
+    <div id="alert" style="display: none;">
+        <div id="box-alert">
+            <p class="alert-title">Alerta</p>
+            <p>Você tem certeza que deseja soltar todos os seus pokemons?</p>
+            <span class="yes">Sim</span>
+            <span class="no">Cancelar</span>
+        </div>
+    </div>
     <main id="content">
         <aside id="pokedex">
-            <input type="number" name="selectQTD" id="selectQTD" value="2" min="1" max="10">
-            <button id="add-pokemon">Adicionar Pokemon</button>
-            <button id="reload">Recarregar pagina</button>
+            <div id="hinge">
+                <div id="up-hinge"></div>
+                <div id="down-hinge"></div>
+            </div>
+            <div id="pokedex-body">
+                <div id="pokedex-inside">
+                    <div class="pokedex-title">POKEDEX</div>
+                    <div class="pokedex-title">POKEDEX</div>
+                    <section>
+                        <h3>Procurar por pokemon</h3>
+                        <input id="pokemonsInputArea" type="text" name="" placeholder="Pikachu,1,5,10">
+                        <div id="pokemons-list">
+
+                        </div>
+                        <div class="section-options">
+                            <span onclick="clearPokemons()">LIMPAR</span>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Elemento: <span>BUG</span></h3>
+                        <div id="elements-list">
+                            <img id="bug" class="ESelected" src="/assets/elements/bug.svg" alt="bug" title="bug">
+                            <img id="water" class="ESelected" src="/assets/elements/water.svg" alt="water"
+                                title="water">
+                            <img id="electric" class="ESelected" src="/assets/elements/electric.svg" alt="electric"
+                                title="electric">
+                            <img id="flying" class="ESelected" src="/assets/elements/flying.svg" alt="flying"
+                                title="flying">
+                            <img id="ghost" class="ESelected" src="/assets/elements/ghost.svg" alt="ghost"
+                                title="ghost">
+                            <img id="dark" class="ESelected" src="/assets/elements/dark.svg" alt="dark" title="dark">
+                            <img id="fire" class="ESelected" src="/assets/elements/fire.svg" alt="fire" title="fire">
+                            <img id="psychic" class="ESelected" src="/assets/elements/psychic.svg" alt="psychic"
+                                title="psychic">
+                            <img id="fighting" class="ESelected" src="/assets/elements/fighting.svg" alt="fighting"
+                                title="fighting">
+                            <img id="normal" class="ESelected" src="/assets/elements/normal.svg" alt="normal"
+                                title="normal">
+                            <img id="dragon" class="ESelected" src="/assets/elements/dragon.svg" alt="dragon"
+                                title="dragon">
+                            <img id="ice" class="ESelected" src="/assets/elements/ice.svg" alt="ice" title="ice">
+                            <img id="poison" class="ESelected" src="/assets/elements/poison.svg" alt="poison"
+                                title="poison">
+                            <img id="rock" class="ESelected" src="/assets/elements/rock.svg" alt="rock" title="rock">
+                            <img id="steel" class="ESelected" src="/assets/elements/steel.svg" alt="steel"
+                                title="steel">
+                            <img id="fairy" class="ESelected" src="/assets/elements/fairy.svg" alt="fairy"
+                                title="fairy">
+                            <img id="grass" class="ESelected" src="/assets/elements/grass.svg" alt="grass"
+                                title="grass">
+                        </div>
+                        <div class="section-options">
+                            <span onclick="allElements()">TODOS</span>
+                            <hr class="section-options-demark">
+                            <span onclick="clearElements()">LIMPAR</span>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Capturados: <span>PIKACHU</span></h3>
+                        <div id="captured-pokemons">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/1.png"
+                                alt="">
+                        </div>
+                        <div class="section-options">
+                            <span onclick="allCaputed()">TODOS</span>
+                            <hr class="section-options-demark">
+                            <span onclick="clearCaputed()">LIMPAR</span>
+                    </section>
+                    <div id="listForPages">
+                        <p>Página: </p>
+                        <i class="fa-solid fa-angles-left"></i>
+                        <i class="fa-solid fa-angle-left"></i>
+                        <input value="1" type="text" id="inputPageValue" maxlength="2" placeholder="1"
+                            pattern="[0-9]"></input>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <i class="fa-solid fa-angles-right"></i>
+                    </div>
+                </div>
+                <div id="pokedex-options">
+                    <div class="pokedex-option" id="pokedex-close"></div>
+                    <div class="pokedex-option" id="pokedex-minimize"></div>
+                    <div class="pokedex-option" id="pokedex-maximize"></div>
+                </div>
+            </div>
         </aside>
+        <!-- <header>teste</header> -->
         <section id="cards-area">
+            <article class="card">
+                <div class="face front" style="display: block;">
+                    <div class="card-header">
+                        <h1 class="poke-number">#000</h1>
+                        <svg class="up-part" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10">
+                            <path d="M13 10 20 10 A1 1 0 000 10L7 10A1 1 90 0113 10z" />
+                        </svg>
+                        <figure class="poke-img">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
+                                alt="Pokemon Img" title="Bulbassar #1">
+                        </figure>
+                        <div class="flags">
+                            <svg class="flag1 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
+                                <path class="flagpath1" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
+                                <text x="4" y="6.5" font-size="2.5" text-anchor="middle">Nv</text>
+                                <text x="4" y="9.5" font-size="2.5" text-anchor="middle">1</text>
+                            </svg>
+                            <svg class="flag2 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
+                                <path class="flagpath2" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
+                                <text x="4" y="6" font-size="2.5" text-anchor="middle">Nv</text>
+                                <text x="4" y="9.5" font-size="2.5" text-anchor="middle">2</text>
+                            </svg>
+                            <svg class="flag3 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
+                                <path class="flagpath3" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
+                                <text x="4" y="6" font-size="2.5" text-anchor="middle">Nv</text>
+                                <text x="4" y="9.5" font-size="2.5" text-anchor="middle">3</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <figure class="element">
+                            <img src="./assets/elements/default.svg" alt="Element" title="Element">
+                        </figure>
+                        <h1 class="poke-name">Name</h1>
+                        <ul class="pokemon-stats">
+                            <li class="stats-line">
+                                <p>Attack</p>
+                                <div class="stats">
+                                    <span style="width: 100%;"></span>
+                                </div>
+                                <span class="stats-number">10</span>
+                            </li>
+                            <li class="stats-line">
+                                <p>Defense</p>
+                                <div class="stats">
+                                    <span style="width: 100%;"></span>
+                                    <span style="width: 25%;"></span>
+                                </div>
+                                <span class="stats-number">10</span>
+                            </li>
+                            <li class="stats-line">
+                                <p>Speed</p>
+                                <div class="stats">
+                                    <span style="width: 100%;"></span>
+                                </div>
+                                <span class="stats-number">10</span>
+                            </li>
+                            <li class="stats-line">
+                                <p>S.Attack</p>
+                                <div class="stats">
+                                    <span style="width: 100%;"></span>
+                                    <span style="width: 100%;"></span>
+                                </div>
+                                <span class="stats-number">10</span>
+                            </li>
+                            <li class="stats-line">
+                                <p>S.Defense</p>
+                                <div class="stats">
+                                    <span style="width: 100%;"></span>
+                                    <span style="width: 100%;"></span>
+                                    <span style="width: 50%;"></span>
+                                </div>
+                                <span class="stats-number">10</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
         </section>
     </main>
 </body>

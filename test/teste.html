@@ -6,92 +6,55 @@
     <link rel="stylesheet" href="teste.css">
     <script src="script.js" defer></script>
     <title>Document</title>
-</head>
-<body style="filter: invert(100%); background-color: black;">
-    <h2>Calculadora de Soma</h2>
-    <p>Digite um número para somar ao último valor:</p>
-    <input type="number" id="numero" min="1" value="2" max="10">
-    <button onclick="somar()">Somar</button>
-    <p id="resultado">Resultado:</p>
-    <p id="contagem">Contagem:</p>
-
-    <!-- <article class="card">
-        <div class="face front" style="display: block;">
-            <div class="card-header">
-                <h1 class="poke-number">#000</h1>
-                <svg class="up-part" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10">
-                    <path d="M13 10 20 10 A1 1 0 000 10L7 10A1 1 90 0113 10z" />
-                </svg>
-                <figure class="poke-img">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
-                        alt="Pokemon Img" title="Bulbassar #1">
-                </figure>
-                <div class="flags">
-                    <svg class="flag1 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
-                        <path class="flagpath1" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
-                        <text x="4" y="6.5" font-size="2.5" text-anchor="middle">Nv</text>
-                        <text x="4" y="9.5" font-size="2.5" text-anchor="middle">1</text>
-                    </svg>
-                    <svg class="flag2 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
-                        <path class="flagpath2" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
-                        <text x="4" y="6" font-size="2.5" text-anchor="middle">Nv</text>
-                        <text x="4" y="9.5" font-size="2.5" text-anchor="middle">2</text>
-                    </svg>
-                    <svg class="flag3 svgFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 11">
-                        <path class="flagpath3" d="M 0 0 L 8 0 L 8 9 L 4 11 L 0 9 Z" />
-                        <text x="4" y="6" font-size="2.5" text-anchor="middle">Nv</text>
-                        <text x="4" y="9.5" font-size="2.5" text-anchor="middle">3</text>
-                    </svg>
-                </div>
+    <style>
+        .container {
+            display: flex;
+        }
+    
+        .drag-container {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed #ccc;
+            margin-right: 20px;
+        }
+    
+        .drop-container {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed #ccc;
+        }
+    
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="drag-container" id="drag-container" draggable="true" ondragstart="dragStart(event)">
+                <img src="https://via.placeholder.com/150" alt="Imagem para arrastar">
             </div>
-            <div class="card-body">
-                <figure class="element">
-                    <img src="./assets/elements/default.svg" alt="Element" title="Element">
-                </figure>
-                <h1 class="poke-name">Name</h1>
-                <ul class="pokemon-stats">
-                    <li class="stats-line">
-                        <p>Attack</p>
-                        <div class="stats">
-                            <span style="width: 100%;"></span>
-                        </div>
-                        <span class="stats-number">10</span>
-                    </li>
-                    <li class="stats-line">
-                        <p>Defense</p>
-                        <div class="stats">
-                            <span style="width: 100%;"></span>
-                            <span style="width: 25%;"></span>
-                        </div>
-                        <span class="stats-number">10</span>
-                    </li>
-                    <li class="stats-line">
-                        <p>Speed</p>
-                        <div class="stats">
-                            <span style="width: 100%;"></span>
-                        </div>
-                        <span class="stats-number">10</span>
-                    </li>
-                    <li class="stats-line">
-                        <p>S.Attack</p>
-                        <div class="stats">
-                            <span style="width: 100%;"></span>
-                            <span style="width: 100%;"></span>
-                        </div>
-                        <span class="stats-number">10</span>
-                    </li>
-                    <li class="stats-line">
-                        <p>S.Defense</p>
-                        <div class="stats">
-                            <span style="width: 100%;"></span>
-                            <span style="width: 100%;"></span>
-                            <span style="width: 50%;"></span>
-                        </div>
-                        <span class="stats-number">10</span>
-                    </li>
-                </ul>
+            <div class="drop-container" id="drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Solte aqui para copiar a imagem
             </div>
         </div>
-    </article> -->
-</body>
+    
+        <script>
+            function dragStart(event) {
+                event.dataTransfer.setData("text", event.target.id);
+            }
+    
+            function allowDrop(event) {
+                event.preventDefault();
+            }
+    
+            function drop(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("text");
+                var draggedImage = document.getElementById(data).getElementsByTagName('img')[0].cloneNode(true);
+                event.target.appendChild(draggedImage);
+            }
+        </script>
+    </body>
 </html>
