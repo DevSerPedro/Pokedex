@@ -1,0 +1,55 @@
+#container {
+    display: flex;
+    gap: 5px;
+}
+
+#drag-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 5px;
+    
+    padding: 5px;
+
+    width: 300px;
+    height: 300px;
+    
+    border: 2px dashed #ccc;
+}
+
+#drop-container {
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 5px;
+    
+    padding: 5px;
+
+    width: 300px;
+    height: 300px;
+    
+    border: 2px dashed #ccc;
+}
+
+#drop-container p{
+    user-select: none;
+    position: absolute;
+    
+    top: 120px;
+    left: 35px;
+    
+    opacity: 50%;
+}
+
+.card{
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+    background-color: antiquewhite;
+}

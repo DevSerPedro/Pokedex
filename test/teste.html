@@ -1,60 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="teste.css">
     <script src="script.js" defer></script>
     <title>Document</title>
-    <style>
-        .container {
-            display: flex;
-        }
-    
-        .drag-container {
-            width: 300px;
-            height: 300px;
-            border: 2px dashed #ccc;
-            margin-right: 20px;
-        }
-    
-        .drop-container {
-            width: 300px;
-            height: 300px;
-            border: 2px dashed #ccc;
-        }
-    
-        img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-    </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="drag-container" id="drag-container" draggable="true" ondragstart="dragStart(event)">
-                <img src="https://via.placeholder.com/150" alt="Imagem para arrastar">
-            </div>
-            <div class="drop-container" id="drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Solte aqui para copiar a imagem
-            </div>
+</head>
+
+<body>
+    <div id="container">
+        <div id="drag-container">
+            <div class="card" id="1" draggable="true">Card 1</div>
+            <div class="card" id="2" draggable="true">Card 2</div>
+            <div class="card" id="3" draggable="true">Card 3</div>
+            <div class="card" id="4" draggable="true">Card 4</div>
+            <div class="card" id="4" draggable="true">Card 5</div>
+            
         </div>
-    
-        <script>
-            function dragStart(event) {
-                event.dataTransfer.setData("text", event.target.id);
-            }
-    
-            function allowDrop(event) {
-                event.preventDefault();
-            }
-    
-            function drop(event) {
-                event.preventDefault();
-                var data = event.dataTransfer.getData("text");
-                var draggedImage = document.getElementById(data).getElementsByTagName('img')[0].cloneNode(true);
-                event.target.appendChild(draggedImage);
-            }
-        </script>
-    </body>
+        <div id="drop-container" ondrop="drop(event)" >
+            <p>Solte aqui para copiar a imagem</p>
+        </div>
+    </div>
+</body>
+
 </html>
